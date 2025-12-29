@@ -216,7 +216,7 @@ field and its value MUST include the value
 
 ### Streams {#transmitter-common-stream-configuration}
 
-For all streams requests received by the Trasmitter, the following MUST be true:
+For all streams requests received by the Transmitter, the following MUST be true:
 
 #### Delivery {#transmitter-common-delivery}
 
@@ -240,7 +240,7 @@ authorization with the Transmitter. The Transmitter MAY support multiple streams
 with the same Receiver
 
 **Reading Stream Configuration**
-: A Transmitter MUST be able to provide  current Stream configuration to the
+: A Transmitter MUST be able to provide current Stream configuration to the
 Receiver when requested with valid authorization
 
 **Getting the Stream Status**
