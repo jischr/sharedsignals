@@ -154,7 +154,8 @@ transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## CAEP specification version
 
-This specification supports CAEP {{CAEP}} events from OpenID Continuous Access Evaluation Profile 1.0.
+This specification supports CAEP {{CAEP}} events from OpenID Continuous Access
+Evaluation Profile 1.0.
 
 ## Transmitters {#common-transmitters}
 
@@ -170,7 +171,7 @@ value MUST be `1_0` or greater
 The Transmitter Configuration Metadata MUST include the
 `delivery_methods_supported` field.
 
-### JWKS URI {#jwks-uri}
+### JWKS URI {#transmitter-jwks-uri}
 
 The Transmitter Configuration Metadata MUST include the `jwks_uri` field, and
 its value MUST provide the current signing key of the Transmitter.
@@ -213,11 +214,11 @@ field and its value MUST include the value
 }
 ~~~
 
-### Streams {#common-stream-configuration}
+### Streams {#transmitter-common-stream-configuration}
 
-In all streams created by the Transmitter, the following MUST be true:
+For all streams requests received by the Trasmitter, the following MUST be true:
 
-#### Delivery {#common-delivery}
+#### Delivery {#transmitter-common-delivery}
 
 A Transmitter MUST be able to accept a Create Stream request that includes
 either of the following delivery methods:
@@ -239,32 +240,75 @@ authorization with the Transmitter. The Transmitter MAY support multiple streams
 with the same Receiver
 
 **Reading Stream Configuration**
-: A Receiver MUST be able to obtain current Stream configuration from the
-Transmitter by providing a valid authorization
+: A Transmitter MUST be able to provide  current Stream configuration to the
+Receiver when requested with valid authorization
 
 **Getting the Stream Status**
-: A Receiver MUST be able to obtain the current Stream status from the
-Transmitter by providing a valid authorization
+: A Transmitter MUST be able to provide the current Stream status to the
+Receiver when requested with valid authorization
 
 **Stream Verification**
-: A Receiver MUST be able to verify the liveness of the Stream by requesting
-that the Transmitter send it a Stream Verification event by providing a valid
-authorization
+: A Transmitter MUST be able to support a Stream Verification event from a
+Receiver when requested with valid authorization.
 
-## Receivers {#common-receivers}
+## Receivers
 
 Receivers MUST implement the following features:
 
 ### Delivery Methods {#common-receiver-delivery}
 
-Receivers MUST be able to accept events using the Push-Based Security Event
-Token (SET) Delivery Using HTTP {{RFC8935}} specification and the Poll-Based
-Security Event Token (SET) Delivery Using HTTP {{RFC8936}} specification.
+Receivers MUST be able to accept events using:
+
+* Push-Based Security Event Token (SET) Delivery Using HTTP {{RFC8935}}
+* Poll-Based Security Event Token (SET) Delivery Using HTTP {{RFC8936}}
+
+### JWKS URI {#receiver-jwks-uri}
+
+The Receiver MUST obtain the signature key through the "jwks_uri" from the
+Transmitters Configuration Metadata as defined in Section 7.1 of {{SSF}}
+
+### Authorization Schemes {#receivers-authorization-schemes}
+
+The Receiver MUST use OAuth 2.0 {{RFC6749}} as the authorization when making
+requests to the Transmitter's stream configuration APIs.
 
 ### Implicitly Added Subjects {#common-receiver-subjects}
 
-Receivers MUST assume that all subjects are implicitly included in a Stream,
+The Receiver MUST assume that all subjects are implicitly included in a Stream,
 without any `AddSubject` method invocations.
+
+### Streams {#receiver-common-stream-configuration}
+
+In all streams created by the Receiver, the following MUST be true:
+
+#### Delivery {#common-delivery}
+
+A Receiver MUST send a Create Stream request that includes
+either of the following delivery methods:
+
+* urn:ietf:rfc:8935 (Push)
+* urn:ietf:rfc:8936 (Poll)
+
+#### Stream Control {#receivers-stream-control}
+
+The following Stream Configuration API Methods MUST be supported:
+
+**Creating a Stream**
+: Receivers MUST be able to create a Stream with the Transmitter using valid
+authorization.
+
+**Reading Stream Configuration**
+: A Receiver MUST be able to obtain current Stream configuration from the
+Transmitter using valid authorization
+
+**Getting the Stream Status**
+: A Receiver MUST be able to obtain the current Stream status from the
+Transmitter using valid authorization
+
+**Stream Verification**
+: A Receiver MUST be able to verify the liveness of the Stream by requesting
+that the Transmitter send a Stream Verification event using valid
+authorization
 
 ## Event Subjects {#common-event-subjects}
 
