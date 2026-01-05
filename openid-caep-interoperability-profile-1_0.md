@@ -251,7 +251,12 @@ Receiver when requested with valid authorization
 : A Transmitter MUST be able to support a Stream Verification event from a
 Receiver when requested with valid authorization.
 
-## Receivers
+**Deleting a Stream**
+: A Transmitter MUST support a Stream deletion request from a Receiver
+to its Configuration Endpoint, as defined in {{SSF}} Section 8.1.1.5, when
+requested with valid authorization.
+
+## Receivers {#common-receivers}
 
 Receivers MUST implement the following features:
 
@@ -309,6 +314,11 @@ Transmitter using valid authorization
 : A Receiver MUST be able to verify the liveness of the Stream by requesting
 that the Transmitter send a Stream Verification event using valid
 authorization
+
+**Deleting a Stream**
+: Receivers MUST be able to delete a Stream by making a delete request to the
+Transmitter's Configuration Endpoint, as defined in {{SSF}} Section 8.1.1.5,
+using valid authorization.
 
 ## Event Subjects {#common-event-subjects}
 
