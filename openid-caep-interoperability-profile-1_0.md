@@ -128,6 +128,10 @@ The following specifications are profiled in this document:
 * Continuous Access Evaluation Profile ({{CAEP}})
 * OAuth 2.0 {{RFC6749}}
 
+Device Compliance Change
+: A SSF Transmitter or Receiver is able to respectively generate or respond to
+the CAEP device-compliance-change event
+
 ## Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -369,6 +373,21 @@ field values:
 generate any allowable value of this field
 
 `credential_type`
+: Receivers MUST interpret all allowable values of this field. Transmitters MAY
+generate any allowable value of this field
+
+`reason_admin`
+: Transmitters MUST populate this value with a non-empty string
+
+## Device Compliance Change
+
+In order to support notifying and responding to changes in device compliance status, implementations MUST support the event type `device-compliance-change`. This event is used to signal that a device's adherence to a set of security or organizational compliance policies has changed. implementations MUST support the following field values:
+
+`previous_status`
+: Receivers MUST interpret all allowable values of this field. Transmitters MAY
+generate any allowable value of this field
+
+`current_status`
 : Receivers MUST interpret all allowable values of this field. Transmitters MAY
 generate any allowable value of this field
 
