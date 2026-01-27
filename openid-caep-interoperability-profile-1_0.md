@@ -182,7 +182,7 @@ Transmitter.
 The Transmitter Configuration Metadata MUST include the `configuration_endpoint`
 field as defined in {{SSF}} Section 7.1.
 
-The endpoint identified by configuration_endpoint is used to perform Stream
+The endpoint identified by `configuration_endpoint` is used to perform Stream
 Configuration operations as defined in {{SSF}} Section 8.1.1.
 
 ### Status Endpoint {#status-endpoint}
@@ -251,7 +251,7 @@ of the delivery methods listed above.
 
 #### Stream Control
 
-*Create Stream**
+**Create Stream**
 : The Transmitter MUST support the Create Stream operation as defined in
 {{SSF}} Section 8.1.1.1 when invoked by a Receiver with valid authorization.
 
@@ -283,8 +283,8 @@ Receivers MUST implement the following features.
 
 ### Delivery Methods {#common-receiver-delivery}
 
-Receivers MUST be able to accept events using at least one of the following
-delivery mechanisms:
+Receivers MUST be able to accept events using any one of the two delivery
+mechanisms:
 
 * Push-Based Security Event Token (SET) Delivery Using HTTP {{RFC8935}}
 * Poll-Based Security Event Token (SET) Delivery Using HTTP {{RFC8936}}
@@ -318,7 +318,7 @@ created by the Receiver, the following MUST be true.
 
 When creating a Stream using the Create Stream operation defined in {{SSF}}
 Section 8.1.1.1, the Receiver MUST include a `delivery` object whose `method`
-value is one of the following or omit the value.
+value is one of the following, or omit the `delivery` object.
 
 * `urn:ietf:rfc:8935` (Push)
 * `urn:ietf:rfc:8936` (Poll)
