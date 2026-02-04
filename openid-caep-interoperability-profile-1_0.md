@@ -189,20 +189,8 @@ Configuration operations as defined in {{SSF}} Section 8.1.1.
 
 The Transmitter Configuration Metadata MUST include the `status_endpoint` field.
 
-The endpoint identified by status_endpoint MUST support Read Stream Status (HTTP
-GET) and Update Stream Status (HTTP POST) operations as defined in {{SSF}}
-Sections 8.1.2.1 and 8.1.2.2 respectively.
-
-The Transmitter MUST support the following values in an Update Stream Status
-request:
-
-* `enabled`
-* `paused`
-* `disabled`
-
-For streams that are `paused`, the Transmitter MUST specify (out-of-band) any
-resource constraints on how many events it can retain or for how long. The
-mechanism for conveying this information is outside the scope of this profile.
+The endpoint identified by status_endpoint MUST support the Read Stream Status
+(HTTP GET) operation as defined in {{SSF}} Sections 8.1.2.1.
 
 ### Verification Endpoint {#verification-endpoint}
 
@@ -263,10 +251,6 @@ authorization.
 **Get Stream Status**
 : The Transmitter MUST support the Read Stream Status operation as defined in
 {{SSF}} Section 8.1.2.1 when invoked by a Receiver with valid authorization.
-
-**Update Stream Status**
-: The Transmitter MUST support the Update Stream Status operation as defined in
-{{SSF}} Section 8.1.2.2 when invoked by a Receiver with valid authorization.
 
 **Stream Verification**
 : The Transmitter MUST support Stream Verification as defined in
@@ -342,10 +326,6 @@ defined in {{SSF}} Section 8.1.1.2 using valid authorization.
 **Get Stream Status**
 : The Receiver MUST be able to invoke the Read Stream Status operation as
 defined in {{SSF}} Section 8.1.2.1 using valid authorization.
-
-**Update Stream Status**
-: The Receiver MUST be able to invoke the Update Stream Status operation as
-defined in {{SSF}} Section 8.1.2.2 using valid authorization.
 
 **Stream Verification**
 : The Receiver MUST be able to initiate Stream Verification as defined in
