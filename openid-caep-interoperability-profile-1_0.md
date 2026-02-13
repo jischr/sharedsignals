@@ -213,10 +213,9 @@ field and its value MUST include the value:
 
 ### Streams {#transmitter-common-stream-configuration}
 
-This profile defines additional interoperability requirements for specific SSF
-Stream Management API operations. Transmitters MUST support all mandatory
-behaviors defined by {{SSF}}, in addition to the requirements specified in this
-section.
+Transmitters MUST support all required properties and API contracts defined by
+{{SSF}} Stream Management API operations, in addition to the requirements
+specified in this section.
 
 For all Stream Management API requests received by the Transmitter, the
 following MUST be true.
@@ -290,10 +289,9 @@ without any `AddSubject` method invocations.
 
 ### Streams {#receiver-common-stream-configuration}
 
-This profile defines additional interoperability requirements for specific SSF
-Stream Management API operations. Receivers MUST support all mandatory
-behaviors defined by {{SSF}}, in addition to the requirements specified in this
-section.
+Receivers MUST support all required properties and API contracts defined by
+{{SSF}} Stream Management API operations, in addition to the requirements
+specified in this section.
 
 For Stream Management API requests initiated by the Receiver, and for Streams
 created by the Receiver, the following MUST be true.
