@@ -209,11 +209,11 @@ Verification as defined in {{SSF}} Section 8.1.4.
 The Transmitter Configuration Metadata MUST include the `authorization_schemes`
 field and its value MUST include the value:
 
-```json
+~~~ json
 {
   "spec_urn": "urn:ietf:rfc:6749"
 }
-```
+~~~
 
 ### Streams {#transmitter-common-stream-configuration}
 
@@ -356,7 +356,29 @@ at least one of subject identifier formats specified in this section.
 All events MUST be signed using the `RS256` algorithm using a minimum of
 2048-bit keys.
 
-## OAuth Service
+## OAuth Support
+
+~~~ascii
+┌──────────────┐
+│              │                            ┌─────────────────┐
+│              │   1. Fetch AS Metadata     │                 │
+│              │───────────────────────────►│                 │
+│              │                            │  Authorization  │
+│              │   2. AS Metadata Response  │   Server (AS)   │
+│    Client    │◄───────────────────────────│       --        │
+│(SSF Receiver)│                            │ Trusted by the  │
+│              │   3. Token Request         │ SSF Transmitter │
+│              │───────────────────────────►│                 │
+│              │                            │                 │
+│              │   4. Access Token          │                 │
+│              │◄───────────────────────────│                 │
+│              │                            └─────────────────┘
+│              │   5. SSF API Request with  ┌─────────────────┐
+│              │      Access Token          │ Resource Server │
+│              │───────────────────────────►│(SSF Transmitter)│
+└──────────────┘                            └─────────────────┘
+~~~
+{: #figintro title="OAuth Support for CAEP Interoperability Profile"}
 
 ### Authorization Server
 
@@ -379,8 +401,9 @@ considerations.
 
 ### OAuth Scopes
 
-Depending on the features supported by the OAuth service and the SSF APIs, the
-OAuth Client SHALL discover the OAuth scopes as follows:
+Depending on the features supported by the Authorization Server and the SSF
+APIs, the OAuth Client SHALL discover the OAuth scopes that MAY be used as
+follows:
 
 * If the Resource Server, hosting SSF configuration APIs, supports OAuth
 Protected Resource Metadata {{OPRM}} then the client MUST obtain the required
