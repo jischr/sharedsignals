@@ -278,7 +278,7 @@ methods:
 
 ### JWKS URI {#receiver-jwks-uri}
 
-The Receiver MUST obtain the Transmitter’s signing key(s) using the `jwks_uri`
+The Receiver MUST obtain the Transmitter's signing key(s) using the `jwks_uri`
 from the Transmitter Configuration Metadata, as defined in {{SSF}} Section 7.1.
 
 ### Authorization Schemes {#receivers-authorization-schemes}
@@ -359,24 +359,25 @@ All events MUST be signed using the `RS256` algorithm using a minimum of
 ## OAuth Support
 
 ~~~ascii
-┌──────────────┐
-│              │                            ┌─────────────────┐
-│              │   1. Fetch AS Metadata     │                 │
-│              │───────────────────────────►│                 │
-│              │                            │  Authorization  │
-│              │   2. AS Metadata Response  │   Server (AS)   │
-│    Client    │◄───────────────────────────│       --        │
-│(SSF Receiver)│                            │ Trusted by the  │
-│              │   3. Token Request         │ SSF Transmitter │
-│              │───────────────────────────►│                 │
-│              │                            │                 │
-│              │   4. Access Token          │                 │
-│              │◄───────────────────────────│                 │
-│              │                            └─────────────────┘
-│              │   5. SSF API Request with  ┌─────────────────┐
-│              │      Access Token          │ Resource Server │
-│              │───────────────────────────►│(SSF Transmitter)│
-└──────────────┘                            └─────────────────┘
++--------------+
+|              |                            +-----------------+
+|              |   1. Fetch AS Metadata     |                 |
+|              |--------------------------->|                 |
+|              |                            |  Authorization  |
+|              |   2. AS Metadata Response  |   Server (AS)   |
+|    Client    |<---------------------------|       --        |
+|(SSF Receiver)|                            | Trusted by the  |
+|              |   3. Token Request         | SSF Transmitter |
+|              |--------------------------->|                 |
+|              |                            |                 |
+|              |   4. Access Token          |                 |
+|              |<---------------------------|                 |
+|              |                            +-----------------+
+|              |
+|              |   5. SSF API Request with  +-----------------+
+|              |      Access Token          | Resource Server |
+|              |--------------------------->|(SSF Transmitter)|
++--------------+                            +-----------------+
 ~~~
 {: #figintro title="OAuth Support for CAEP Interoperability Profile"}
 
