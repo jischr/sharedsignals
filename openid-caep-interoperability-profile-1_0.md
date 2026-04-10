@@ -358,28 +358,42 @@ All events MUST be signed using the `RS256` algorithm using a minimum of
 
 ## OAuth Support
 
+Implementations MUST support OAuth 2.0 {{RFC6749}}. The following diagram
+illustrates the OAuth flow between the SSF Transmitter, SSF Receiver, and the
+Authorization Server.
+
 ~~~ascii
 +--------------+
-|              |                            +-----------------+
-|              |   1. Fetch AS Metadata     |                 |
-|              |--------------------------->|                 |
-|              |                            |  Authorization  |
-|              |   2. AS Metadata Response  |   Server (AS)   |
-|    Client    |<---------------------------|       --        |
-|(SSF Receiver)|                            | Trusted by the  |
-|              |   3. Token Request         | SSF Transmitter |
-|              |--------------------------->|                 |
-|              |                            |                 |
-|              |   4. Access Token          |                 |
-|              |<---------------------------|                 |
-|              |                            +-----------------+
+|              |                             +-----------------+
+|              | 1. AS Metadata Request      |                 |
+|              |---------------------------->|                 |
+|              |<----------------------------|  Authorization  |
+|              | Client obtains AS Metadata  |   Server (AS)   |
+|    Client    |                             |       --        |
+|(SSF Receiver)|                             | Trusted by the  |
+|              | 2. OAuth Exchange           | SSF Transmitter |
+|              |<--------------------------->|                 |
+|              | Client obtains access token |                 |
+|              |                             |                 |
+|              |                             +-----------------+
 |              |
-|              |   5. SSF API Request with  +-----------------+
-|              |      Access Token          | Resource Server |
-|              |--------------------------->|(SSF Transmitter)|
-+--------------+                            +-----------------+
+|              | 3. SSF API Request with     +-----------------+
+|              |    Access Token             | Resource Server |
+|              |---------------------------->|(SSF Transmitter)|
++--------------+                             +-----------------+
 ~~~
 {: #figintro title="OAuth Support for CAEP Interoperability Profile"}
+
+1. The SSF Receiver/Client makes a request to fetch the Authorization Server
+metadata at its Metadata URL. The Metadata URL can be discovered from the
+Resource Server via {{OPRM}} or out-of-band. The Authorization Server responds
+with the Authorization Server metadata document as described in {{RFC8414}}.
+
+2. The SSF Receiver/Client obtains an access token from the Authorization Server
+using either the authorization code grant or the client credentials grant.
+
+3. The SSF Receiver/Client makes a request to the Transmitter's protected
+endpoints using the access token.
 
 ### Authorization Server
 
