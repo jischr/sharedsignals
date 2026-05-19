@@ -37,7 +37,7 @@ normative:
   RFC8417:
   RFC9493: # Subject Identifier Formats for SETs
   RFC8935: # Push delivery
-  RFC8936: # POLL delivery
+  RFC8936: # Poll delivery
   SSF:
     target: https://openid.net/specs/openid-sharedsignals-framework-1_0-final.html
     title: OpenID Shared Signals Framework Specification 1.0
@@ -135,21 +135,21 @@ they appear in all capitals, as shown here.
 
 # Common Requirements {#common-requirements}
 
-The following requirements are common across all use-cases defined in this
+The following requirements are common across all use cases defined in this
 document.
 
-## Network layer protection
+## Network Layer Protection
 
 * The SSF Transmitter MUST offer TLS protected endpoints and MUST establish
 connections to other servers using TLS. TLS connections MUST be set up to use
 TLS version 1.2 or later.
 * The SSF Transmitter MUST follow the recommendations for Secure Use of
-Transport Layer Security in [RFC9325]{{RFC9325}}.
-* The SSF receiver MUST perform TLS server certificate signature checks, chain
+Transport Layer Security in {{RFC9325}}.
+* The SSF Receiver MUST perform TLS server certificate signature checks, chain
 of trust validations, expiry and revocation status checks before calling the SSF
-Transmitter APIs, as per [RFC6125]{{RFC6125}}.
+Transmitter APIs, as per {{RFC6125}}.
 
-## CAEP specification version
+## CAEP Specification Version
 
 This specification supports CAEP {{CAEP}} events from OpenID Continuous Access
 Evaluation Profile 1.0.
@@ -158,7 +158,7 @@ Evaluation Profile 1.0.
 
 Transmitters MUST implement the following features.
 
-### Spec Version {#spec-version}
+### Specification Version {#spec-version}
 
 The Transmitter Configuration Metadata MUST include a `spec_version` field, and
 its value MUST be `1_0` or greater.
@@ -186,8 +186,8 @@ Create Stream operation as defined in {{SSF}} Section 8.1.1.
 
 The Transmitter Configuration Metadata MUST include the `status_endpoint` field.
 
-The endpoint identified by status_endpoint MUST support the Read Stream Status
-(HTTP GET) operation as defined in {{SSF}} Sections 8.1.2.1.
+The endpoint identified by `status_endpoint` MUST support the Read Stream Status
+(HTTP GET) operation as defined in {{SSF}} Section 8.1.2.1.
 
 ### Verification Endpoint {#verification-endpoint}
 
@@ -244,7 +244,7 @@ of the delivery methods listed above.
 defined in {{SSF}} Section 8.1.1.2 when invoked by a Receiver with valid
 authorization.
 
-**Get Stream Status**
+**Read Stream Status**
 : The Transmitter MUST support the Read Stream Status operation as defined in
 {{SSF}} Section 8.1.2.1 when invoked by a Receiver with valid authorization.
 
@@ -282,7 +282,7 @@ requests to the Transmitter.
 ### Implicitly Added Subjects {#common-receiver-subjects}
 
 The Receiver MUST assume that all subjects are implicitly included in a Stream,
-without any `AddSubject` method invocations.
+without any Add Subject method invocations.
 
 ### Streams {#receiver-common-stream-configuration}
 
@@ -303,7 +303,7 @@ value is one of the following, or omit the `delivery` object.
 * `urn:ietf:rfc:8936` (Poll)
 
 If the Create Stream request does not include the `delivery` property, it is
-assumed to be delivery method of `urn:ietf:rfc:8936` (Poll), as
+assumed to have a delivery method of `urn:ietf:rfc:8936` (Poll), as
 defined in {{SSF}}.
 
 #### Stream Control {#receivers-stream-control}
@@ -318,7 +318,7 @@ The following Stream Management operations MUST be supported by the Receiver.
 : The Receiver MUST be able to invoke the Read Stream Configuration operation as
 defined in {{SSF}} Section 8.1.1.2 using valid authorization.
 
-**Get Stream Status**
+**Read Stream Status**
 : The Receiver MUST be able to invoke the Read Stream Status operation as
 defined in {{SSF}} Section 8.1.2.1 using valid authorization.
 
@@ -342,11 +342,11 @@ Event Tokens" {{RFC9493}} MUST be supported:
 
 Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
-at least one of subject identifier formats specified in this section.
+at least one of the subject identifier formats specified in this section.
 
 ## Event Signatures
 
-All events MUST be signed using the `RS256` algorithm using a minimum of
+All events MUST be signed using the `RS256` algorithm with a minimum of
 2048-bit keys.
 
 ## OAuth Support
@@ -363,27 +363,27 @@ Implementations MUST support OAuth 2.0 {{RFC6749}}. In this context, the OAuth
 
 An OAuth {{RFC6749}} Authorization Server issues access tokens. In the context
 of this profile, the Authorization Server that issues access tokens can be a
-separate entity than the SSF Transmitter.
+different entity than the SSF Transmitter.
 
 * The Authorization Server MAY distribute discovery metadata (such as the
 authorization endpoint) via Authorization Server Metadata as specified in
-[RFC8414]{{RFC8414}}
+{{RFC8414}}
 * The Authorization Server MUST support at least one of the following to issue a
-short-lived access token to the Receiver
-  * client credential grant flow {{RFC6749}} section 4.4
-  * authorization code flow {{RFC6749}} section 4.1
+short-lived access token to the Receiver:
+  * client credentials grant {{RFC6749}} Section 4.4
+  * authorization code grant {{RFC6749}} Section 4.1
 
-A short lived access token is defined as one in which the value of the
-`exp` claim is not longer than 60 minutes after `nbf` claim. Please refer to
-access token lifetimes in the security considerations of {{FAPI}} for additional
-considerations.
+A short-lived access token is defined as one whose lifetime is no more than
+60 minutes.
+Please refer to access token lifetimes in the security considerations of
+{{FAPI}} for additional considerations.
 
 ### OAuth Scopes
 
 The following scopes MUST be supported:
 
 * An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
-SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
+SSF Receivers MUST reserve the scopes for the SSF endpoints with the prefix
 of `ssf`
 * All the SSF stream configuration management API operations MUST accept
 `ssf.manage` scope
@@ -393,15 +393,15 @@ scope
 ### The SSF Transmitter as a Resource Server
 
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
-Bearer Token Usage [RFC6750]{{RFC6750}}
-* MUST NOT accept access tokens in the query parameters stated in Section 2.3 of
-OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
+Bearer Token Usage {{RFC6750}}
+* MUST NOT accept access tokens via the URI query parameter mechanism described
+in Section 2.3 of OAuth 2.0 Bearer Token Usage {{RFC6750}}
 * MUST verify the validity, integrity, expiration and revocation status of
 access tokens
 * MUST verify that the authorization represented by the access token is
-sufficient for the requested resource access.
+sufficient for the requested resource access
 * If the access token is not sufficient for the requested action, the Resource
-server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
+Server MUST return errors as per Section 3.1 of {{RFC6750}}
 
 ## Security Event Token
 
@@ -411,14 +411,14 @@ The "events" claim of the SET MUST contain only one event.
 
 # Use Cases
 
-Implementations MAY choose to support one or more of the following use-cases in
-order to be considered an interoperable implementation.
+An implementation conforming to this profile MUST support at least one of the
+following use cases.
 
 ## Session Revocation / Logout
 
 In order to support session revocation or logout, implementations MUST support
 the CAEP event type `session-revoked`. The `reason_admin` field of the event
-MUST be populated with a non-empty value.
+MUST be populated with a non-empty object.
 
 ## Credential Change
 
@@ -436,12 +436,13 @@ generate any allowable value of this field
 generate any allowable value of this field
 
 `reason_admin`
-: Transmitters MUST populate this value with a non-empty string
+: Transmitters MUST populate this value with a non-empty object
 
 ## Device Compliance Change
 
 In order to support notifying and responding to changes in device compliance
-status, implementations MUST support the event type `device-compliance-change`.
+status, implementations MUST support the CAEP event type
+`device-compliance-change`.
 This event is used to signal that a device's adherence to a set of security or
 organizational compliance policies has changed. Implementations MUST support
 the following field values:
@@ -455,13 +456,13 @@ generate any allowable value of this field
 generate any allowable value of this field
 
 `reason_admin`
-: Transmitters MUST populate this value with a non-empty string
+: Transmitters MUST populate this value with a non-empty object
 
 # Security Considerations
 
 There are no additional security considerations that arise from this document.
-These are covered in the "Security Considerations" sections of {{SSF}} and
-{{CAEP}} specifications.
+Security considerations applicable to this profile are covered in the
+"Security Considerations" sections of {{SSF}} and {{CAEP}}.
 
 --- back
 
