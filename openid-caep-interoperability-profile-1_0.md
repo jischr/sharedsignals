@@ -367,7 +367,8 @@ different entity than the SSF Transmitter.
 
 * The Authorization Server MAY distribute discovery metadata (such as the
 authorization endpoint) via Authorization Server Metadata as specified in
-{{RFC8414}}
+{{RFC8414}}. The method in which the Receiver determines which Authorization
+Server to use is out of scope.
 * The Authorization Server MUST support at least one of the following to issue a
 short-lived access token to the Receiver:
   * client credentials grant {{RFC6749}} Section 4.4
@@ -393,7 +394,9 @@ Server MUST return errors as per Section 3.1 of {{RFC6750}}
 
 ### OAuth Scopes
 
-SSF Receivers MUST reserve the scopes with a prefix of `ssf.` for SSF endpoints.
+Scopes values beginning with ‘ssf.’ are reserved and MUST only be defined by
+the SSF specifications. This is to ensure there is no unintended scope name
+collisions.
 
 An OAuth {{RFC6749}} Authorization Server issuing tokens to SSF Receivers MUST
 support the following scopes:
