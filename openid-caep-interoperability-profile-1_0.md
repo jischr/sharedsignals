@@ -378,18 +378,6 @@ A short-lived access token is defined as one whose lifetime is no more than
 Please refer to access token lifetimes in the security considerations of
 {{FAPI}} for additional considerations.
 
-### OAuth Scopes
-
-The following scopes MUST be supported:
-
-* An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
-SSF Receivers MUST reserve the scopes for the SSF endpoints with the prefix
-of `ssf`
-* All the SSF stream configuration management API operations MUST accept
-`ssf.manage` scope
-* All the SSF stream configuration Read API operations MUST accept `ssf.read`
-scope
-
 ### The SSF Transmitter as a Resource Server
 
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0
@@ -402,6 +390,21 @@ access tokens
 sufficient for the requested resource access
 * If the access token is not sufficient for the requested action, the Resource
 Server MUST return errors as per Section 3.1 of {{RFC6750}}
+
+### OAuth Scopes
+
+SSF Receivers MUST reserve the scopes with a prefix of `ssf.` for SSF endpoints.
+
+An OAuth {{RFC6749}} Authorization Server issuing tokens to SSF Receivers MUST
+support the following scopes:
+
+* `ssf.manage`
+* `ssf.read`
+
+The `ssf.read` scope allows Read Stream Configuration and Get Stream Status
+operations. The `ssf.manage` scope includes all `ssf.read` permissions and
+additionally allows Create Stream, Delete Stream, and Stream Verification
+operations.
 
 ## Security Event Token
 
