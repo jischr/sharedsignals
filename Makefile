@@ -39,6 +39,6 @@ propose:
 	@ cp openid-caep-1_0.txt ../publication/sharedsignals/openid-caep-1_0-final.txt
 	@ cp openid-caep-1_0.html ../publication/sharedsignals/openid-caep-1_0-final.html
 	@ cp openid-caep-1_0.md ../publication/sharedsignals/openid-caep-1_0-final.md
-	@ cp openid-caep-1_0.txt ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.txt
-	@ cp openid-caep-1_0.html ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.html
-	@ cp openid-caep-1_0.md ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.md
+	@ cp openid-caep-interoperability-profile-1_0.txt ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.txt
+	@ cp openid-caep-interoperability-profile-1_0.html ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.html
+	@ cp openid-caep-interoperability-profile-1_0.md ../publication/sharedsignals/openid-caep-interoperability-profile-1_0-final.md
