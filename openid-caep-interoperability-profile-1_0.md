@@ -1,5 +1,5 @@
 ---
-title: CAEP Interoperability Profile 1.0 - draft 02
+title: CAEP Interoperability Profile 1.0
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
 
@@ -480,7 +480,7 @@ specification.
 
 # Notices
 
-Copyright (c) 2025 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
 or other interested party a non-exclusive, royalty free, worldwide copyright
@@ -510,35 +510,3 @@ certain patent claims against other contributors and against implementers. The
 OpenID Foundation invites any interested party to bring to its attention any
 copyrights, patents, patent applications, or other proprietary rights that may
 cover technology that may be required to practice this specification.
-
-# Document History
-{:numbered="false"}
-[[ To be removed from the final specification ]]
-
--02
-
-* Updated OAuth section with clarifications (#325)
-* Minor fixes for publishing (#324)
-* Added Receiver requirements (#315)
-* Formatting fixes and device compliance change (#313)
-* Reworked introduction to remove normative language (#302)
-* Updated spec references (#291)
-* Clarify relationship between Transmitter and AS (#245)
-* Non-normative changes (#196)
-* Added security considerations (#190)
-* Added notational conventions (#190)
-* Updated network layer protection guidance (#213)
-* Updated out of date links (#227)
-* Updated required SSF spec version to 1_0
-
--01
-
-* Added document history (#189)
-* Specify one event per "events" claim of SET (#179)
-* Include OAuth specifics (#134)
-* Cleaned up markdown (#91)
-
--00
-
-* Add opaque to the required subject formats (#137)
-* Initial draft
