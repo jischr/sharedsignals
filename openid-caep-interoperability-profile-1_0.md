@@ -515,7 +515,6 @@ rights that may cover technology that may be required to practice this
 specification.
 
 # Document History
-
 {:numbered="false"}
 [[ To be removed from the final specification ]]
 
